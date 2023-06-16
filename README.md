@@ -1,66 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel 10 Basic Application Made with Help Of ChatGpt
+I asked Chatgpt the following 
+"Tell me fastest way to create crud in laravel for just one object Contact using artisan commands options like -m "
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+I am writing Here the Steps ChatGPT replied after some Modificaiton So its Perfect for Basic App.
 
-## About Laravel
+### Step 1: Create the Model
+Use the make:model command with the -m option to generate a model class and a migration file for the object. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+I used This Command 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+php artisan make:model Contact -m
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This command will Create Model and Migration Files Both. 
+The migration file can be found in database/migrations/ and filename will be similar to this _create_contacts_table.php
 
-## Learning Laravel
+### Step 2: Define the Table Structure
+Open the migration file created in the previous step, located in the database/migrations directory. Inside the up method, define the table structure using the available column types and options. For example, if your object has a name and description, the migration file may look like this:
+We are adding two new columns : 1. Name , 2 : Description 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+So Update the below function with these new column definations 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+public function up()
+{
+    Schema::create('objects', function (Blueprint $table) {
+        $table->id();
+        // new columns 
+        $table->string('name');
+        $table->text('description');
+        $table->timestamps();
+    });
+}
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Step 3: Run the Migration
+Use the migrate command to run the migration and create the table in the database:
 
-## Laravel Sponsors
+Command : 
+php artisan migrate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Step 4: Create the Controller
+Generate a controller using the make:controller command. 
 
-### Premium Partners
+php artisan make:controller ContactController -m --model=Contact -r
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+The -r option generates a controller with CRUD methods, and the --mo option specifies the model class to be used by the controller.
 
-## Contributing
+This will create Controller with pre-defined functions to handle CRUD Operations 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Step 5: Define Routes
+In the routes/web.php file, define the routes for the Above Controller that contains CRUD operations functions.
 
-## Code of Conduct
+use App\Http\Controllers\ContactController;
+Route::resource('contacts', ContactController::class);
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Step 6. 
+I asked Chatgpt to provide a layout file for my laravel crud based on bootstrap 5 
 
-## Security Vulnerabilities
+It provided me with Layout file that I saved in resources views directory
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+My Prompts for generating view files 
+1. Give me views files for the above crud in bootstrap 5 and using above layout file . ( Chatgpt Answered me with view files but there were two issues a. I wanted to use same create and edit form file , b. it didn't provide show contact file  )
+2. use same file for create and edit ( chatgpt modified the create file and provided me with view file that can be used for both create / edit form view ) 
+3. A file to display a Contact ( Upon this prompt, chatgpt provided me the show contact view file ) 
 
-## License
+The I asked Chatgpt to Modify the Controller Code to handle CRUD Operations using this prompt
+" update the controller file with related function so that crud operations work and use the above views "
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+It successfully Modified the controller and provided me with code that was pretty fine except a few changes I had to make.
+
+You can See All the Prompts here At OpenAI link https://chat.openai.com/share/2d4b7065-1890-40d1-9557-c0a2dddc290e
