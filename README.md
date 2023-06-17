@@ -1,6 +1,6 @@
 # Laravel 10 Basic Application Made with Help Of ChatGpt
 I asked Chatgpt the following 
-"Tell me fastest way to create crud in laravel for just one object Contact using artisan commands options like -m "
+`"Tell me fastest way to create crud in laravel for just one object Contact using artisan commands options like -m "`
 
 I am writing Here the Steps ChatGPT replied after some Modificaiton So its Perfect for Basic App.
 
@@ -62,12 +62,13 @@ I asked Chatgpt to provide a layout file for my laravel crud based on bootstrap 
 It provided me with Layout file that I saved in resources views directory
 
 My Prompts for generating view files 
-1. Give me views files for the above crud in bootstrap 5 and using above layout file . ( Chatgpt Answered me with view files but there were two issues a. I wanted to use same create and edit form file , b. it didn't provide show contact file  )
-2. use same file for create and edit ( chatgpt modified the create file and provided me with view file that can be used for both create / edit form view ) 
+`1. Give me views files for the above crud in bootstrap 5 and using above layout file.` 
+( Chatgpt Answered me with view files but there were two issues a. I wanted to use same create and edit form file , b. it didn't provide show contact file  )
+2. Use same file for create and edit ( Chatgpt modified the create file and provided me with view file that can be used for both create / edit form view ) 
 3. A file to display a Contact ( Upon this prompt, chatgpt provided me the show contact view file ) 
 
 The I asked Chatgpt to Modify the Controller Code to handle CRUD Operations using this prompt
-" update the controller file with related function so that crud operations work and use the above views "
+`" update the controller file with related function so that crud operations work and use the above views "`
 
 It successfully Modified the controller and provided me with code that was pretty fine except a few changes I had to make.
 
