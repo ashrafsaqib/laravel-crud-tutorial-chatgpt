@@ -9,7 +9,7 @@ Use the make:model command with the -m option to generate a model class and a mi
 
 I used This Command 
 
-php artisan make:model Contact -m
+`php artisan make:model Contact -m`
 
 This command will Create Model and Migration Files Both. 
 The migration file can be found in database/migrations/ and filename will be similar to this _create_contacts_table.php
@@ -20,6 +20,7 @@ We are adding two new columns : 1. Name , 2 : Description
 
 So Update the below function with these new column definations 
 
+```
 public function up()
 {
     Schema::create('objects', function (Blueprint $table) {
@@ -30,17 +31,18 @@ public function up()
         $table->timestamps();
     });
 }
-
+```
+   
 ### Step 3: Run the Migration
 Use the migrate command to run the migration and create the table in the database:
 
 Command : 
-php artisan migrate
+`php artisan migrate`
 
 ### Step 4: Create the Controller
 Generate a controller using the make:controller command. 
 
-php artisan make:controller ContactController -m --model=Contact -r
+`php artisan make:controller ContactController -m --model=Contact -r`
 
 The -r option generates a controller with CRUD methods, and the --mo option specifies the model class to be used by the controller.
 
@@ -49,8 +51,10 @@ This will create Controller with pre-defined functions to handle CRUD Operations
 ### Step 5: Define Routes
 In the routes/web.php file, define the routes for the Above Controller that contains CRUD operations functions.
 
+```
 use App\Http\Controllers\ContactController;
 Route::resource('contacts', ContactController::class);
+```
 
 ### Step 6. 
 I asked Chatgpt to provide a layout file for my laravel crud based on bootstrap 5 
